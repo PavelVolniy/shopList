@@ -20,6 +20,5 @@ class MainActivity : AppCompatActivity() {
             Log.e("MainActivity", it.toString())
         }
 
-        viewModel.getShopList()
     }
 }
