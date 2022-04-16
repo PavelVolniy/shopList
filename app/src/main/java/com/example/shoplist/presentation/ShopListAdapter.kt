@@ -1,10 +1,11 @@
 package com.example.shoplist.presentation
 
-import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoplist.R
 import com.example.shoplist.domain.ShopItem
@@ -18,13 +19,20 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
         const val VIEW_HOLDER_POOL_SIZE = 10
     }
 
+    var onShopItemLongClickListener: ((ShopItem)-> Unit)? = null
+    var onShopItemClickListener: ((ShopItem)-> Unit)? = null
+
     var shopList = listOf<ShopItem>()
         set(value) {
+            val callback = ShopListDiffCallback(shopList, value)
+            val diffResult = DiffUtil.calculateDiff(callback)
+            diffResult.dispatchUpdatesTo(this)
             field = value
-            notifyDataSetChanged()
         }
 
+    var count = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
+        Log.e("test count", (++count).toString())
         val layout = when (viewType) {
             VIEW_TYPE_DISABLED -> R.layout.item_shop_disabled
             VIEW_TYPE_ENABLED -> R.layout.item_shop_enabled
@@ -38,7 +46,11 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
         val shopItem = shopList[position]
         viewHolder.tvName.text = shopItem.name
         viewHolder.tvCount.text = shopItem.count.toString()
+        viewHolder.view.setOnClickListener(){
+            onShopItemClickListener?.invoke(shopItem)
+        }
         viewHolder.view.setOnLongClickListener() {
+            onShopItemLongClickListener?.invoke(shopItem)
             true
         }
     }
@@ -53,6 +65,9 @@ class ShopListAdapter : RecyclerView.Adapter<ShopListAdapter.ShopItemViewHolder>
     }
 
 
+//    interface OnShopItemLongClickListener{
+//        fun onShopItemLongClick(shopItem: ShopItem)
+//    }
 
     override fun getItemCount(): Int {
         return shopList.size
