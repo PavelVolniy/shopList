@@ -4,4 +4,6 @@
     <string name="hintFieldName">Name:</string>
     <string name="hintFieldCount">count</string>
     <string name="saveButtonText">save</string>
+    <string name="error_input_count">invalid count</string>
+    <string name="error_input_name">invalid name</string>
 </resources>
