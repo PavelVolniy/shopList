@@ -6,4 +6,6 @@
     <string name="saveButtonText">save</string>
     <string name="error_input_count">invalid count</string>
     <string name="error_input_name">invalid name</string>
+    <string name="default_text">Что то там</string>
+    <string name="thickness">1</string>
 </resources>
