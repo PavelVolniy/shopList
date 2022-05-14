@@ -7,10 +7,10 @@ import com.example.shoplist.domain.ShopItem
 @Dao
 interface ShopItemDAO {
     @Query("SELECT * FROM ShopItem")
-    fun getShopItemList(): MutableLiveData<List<ShopItem>>
+    fun getShopItemList(): List<ShopItem>
     @Query("SELECT * FROM ShopItem WHERE id IN (:shopItemID)")
     fun getShopItemById(shopItemID: Int): ShopItem
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertShopItem( shopItem: ShopItem)
     @Delete
     fun deleteShopItem(shopItem: ShopItem)

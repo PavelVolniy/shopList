@@ -13,7 +13,9 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.shoplist.R
 import com.example.shoplist.data.AppDatabase
+import com.example.shoplist.domain.ShopItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
 
@@ -24,7 +26,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        AppDatabase.getAppDataBase(this)
+        testRoom()
         shopItemContainer = findViewById(R.id.shop_item_container)
         setupRecyclerView()
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
@@ -39,6 +41,12 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
             } else {
                 launchFragment(ShopItemFragment.newInstanceAddItem())
             }
+        }
+    }
+
+    private fun testRoom() {
+        thread {
+            AppDatabase.getAppDataBase(this)
         }
     }
 

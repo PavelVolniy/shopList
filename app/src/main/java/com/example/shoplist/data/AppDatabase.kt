@@ -1,6 +1,7 @@
 package com.example.shoplist.data
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -18,6 +19,7 @@ abstract class AppDatabase : RoomDatabase() {
         fun getAppDataBase(context: Context): AppDatabase {
             shopItemDataBase =
                 Room.databaseBuilder(context, AppDatabase::class.java, DATABASE).build()
+            Log.e("test", "$DATABASE was created")
             return shopItemDataBase
         }
 
@@ -25,6 +27,10 @@ abstract class AppDatabase : RoomDatabase() {
             return shopItemDataBase
         }
 
-        const val DATABASE = "database"
+        fun deleteDataBase(){
+            shopItemDataBase
+        }
+
+        private const val DATABASE = "database"
     }
 }
