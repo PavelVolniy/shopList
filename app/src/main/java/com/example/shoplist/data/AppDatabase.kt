@@ -37,10 +37,5 @@ abstract class AppDatabase : RoomDatabase() {
                 return db
             }
         }
-
-//        fun deleteDataBase(){
-//            shopItemDataBase
-//        }
-
     }
 }
