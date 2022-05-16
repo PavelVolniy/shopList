@@ -1,19 +1,19 @@
 package com.example.shoplist.data
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.shoplist.domain.ShopItem
 
 @Dao
 interface ShopItemDAO {
-    @Query("SELECT * FROM ShopItem")
-    fun getShopItemList(): List<ShopItem>
-    @Query("SELECT * FROM ShopItem WHERE id IN (:shopItemID)")
-    fun getShopItemById(shopItemID: Int): ShopItem
+    @Query("SELECT * FROM shopItems ORDER BY enabled DESC")
+    fun getShopItemList(): LiveData<List<ShopItemDbModel>>
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertShopItem( shopItem: ShopItem)
-    @Delete
-    fun deleteShopItem(shopItem: ShopItem)
-    @Update
-    fun updateShopItem(shopItem: ShopItem)
+    suspend fun insertShopItem( shopItemDbModel: ShopItemDbModel)
+    @Query("DELETE FROM shopItems WHERE id=:shopItemID")
+    suspend fun deleteShopItem(shopItemID: Int)
+    @Query("SELECT * FROM shopItems WHERE id=:shopItemID LIMIT 1")
+    suspend fun getShopItemById(shopItemID: Int): ShopItemDbModel
+
 }

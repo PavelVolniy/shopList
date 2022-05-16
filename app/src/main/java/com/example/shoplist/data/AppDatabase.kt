@@ -1,5 +1,6 @@
 package com.example.shoplist.data
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.room.Database
@@ -9,28 +10,37 @@ import com.example.shoplist.domain.ShopItem
 import com.example.shoplist.domain.ShopListRepository
 
 
-@Database(entities = [ShopItem::class], version = 1)
+@Database(entities = [ShopItemDbModel::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun shopItemDAO(): ShopItemDAO
 
     companion object {
-        private lateinit var shopItemDataBase: AppDatabase
+        private var INSTANCE: AppDatabase? = null
+        private val LOCK = Any()
+        private const val NAME_DB = "shopItemDataBase"
 
-        fun getAppDataBase(context: Context): AppDatabase {
-            shopItemDataBase =
-                Room.databaseBuilder(context, AppDatabase::class.java, DATABASE).build()
-            Log.e("test", "$DATABASE was created")
-            return shopItemDataBase
+        fun getInstance(application: Application): AppDatabase {
+            INSTANCE?.let {
+                return it
+            }
+            synchronized(LOCK){
+                INSTANCE?.let {
+                    return it
+                }
+                val db = Room.databaseBuilder(
+                    application,
+                    AppDatabase::class.java,
+                    NAME_DB
+                )
+                    .build()
+                INSTANCE = db
+                return db
+            }
         }
 
-        fun getInstance(): AppDatabase {
-            return shopItemDataBase
-        }
+//        fun deleteDataBase(){
+//            shopItemDataBase
+//        }
 
-        fun deleteDataBase(){
-            shopItemDataBase
-        }
-
-        private const val DATABASE = "database"
     }
 }
