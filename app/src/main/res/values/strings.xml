@@ -8,4 +8,5 @@
     <string name="error_input_name">invalid name</string>
     <string name="default_text">Что то там</string>
     <string name="thickness">1</string>
+    <string name="text_main_menu_clear_list">Очистить список покупок</string>
 </resources>

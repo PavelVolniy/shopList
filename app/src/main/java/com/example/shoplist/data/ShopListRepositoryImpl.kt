@@ -39,6 +39,10 @@ class ShopListRepositoryImpl(
         return mapper.mapDbModelToEntity(dbModel)
     }
 
+    override suspend fun clearShopItemList() {
+        shopItemDAO.deleteAllShopItems()
+    }
+
     override fun getShopList(): MutableLiveData<List<ShopItem>> {
         return MediatorLiveData<List<ShopItem>>().apply {
             addSource(shopItemDAO.getShopItemList()) {
@@ -47,4 +51,6 @@ class ShopListRepositoryImpl(
 
         }
     }
+
+
 }

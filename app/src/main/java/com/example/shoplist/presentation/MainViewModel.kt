@@ -4,10 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.shoplist.data.ShopListRepositoryImpl
-import com.example.shoplist.domain.DeleteShopItemUseCase
-import com.example.shoplist.domain.EditShopItemUseCase
-import com.example.shoplist.domain.GetShopListUseCase
-import com.example.shoplist.domain.ShopItem
+import com.example.shoplist.domain.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -20,6 +17,7 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
     private val getShopListUseCase = GetShopListUseCase(repository)
     private val deleteShopItemUseCase = DeleteShopItemUseCase(repository)
     private val editShopItemUseCase = EditShopItemUseCase(repository)
+    private val deleteAllShopItemsUseCase = DeleteAllShopItemsUseCase(repository)
 
 
     val shopList = getShopListUseCase.getShopList()
@@ -35,6 +33,12 @@ class MainViewModel(application: Application): AndroidViewModel(application) {
         viewModelScope.launch {
             val newShopItem = shopItem.copy(enabled = !shopItem.enabled)
             editShopItemUseCase.editShopItem(newShopItem)
+        }
+    }
+
+    fun deleteAllShopItems(){
+        viewModelScope.launch {
+            deleteAllShopItemsUseCase.deleteAllShopItem()
         }
     }
 }

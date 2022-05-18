@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -19,6 +21,7 @@ import com.example.shoplist.R
 import com.example.shoplist.data.AppDatabase
 import com.example.shoplist.domain.ShopItem
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.zip.Inflater
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
@@ -124,5 +127,20 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
 
     override fun onEditingFinished() {
         Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId){
+            R.id.m_clear_list->{
+                viewModel.deleteAllShopItems()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }
