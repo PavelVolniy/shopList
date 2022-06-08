@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:width="10dp"
-        android:height="50dp"
+        android:width="7dp"
+        android:height="40dp"
         android:gravity="center">
 
         <shape android:shape="rectangle"
             >
             <corners android:radius="20dp"/>
-            <solid android:color="#D5121111"/>
+            <solid android:color="@color/color_plus_bottom"/>
         </shape>
     </item>
-    <item android:width="50dp"
-        android:height="10dp"
+    <item android:width="40dp"
+        android:height="7dp"
         android:gravity="center">
         <shape android:shape="rectangle"
             >
             <size
-                android:width="10dp"
-                android:height="50dp"
+                android:width="7dp"
+                android:height="40dp"
                 />
             <corners android:radius="20dp"/>
-            <solid android:color="#D5121111"/>
+            <solid android:color="@color/color_plus_bottom"/>
         </shape>
     </item>
 </layer-list>

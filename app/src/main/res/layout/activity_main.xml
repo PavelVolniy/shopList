@@ -10,7 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_shop_list"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cv_sum_card"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -31,8 +31,47 @@
         android:clickable="true"
         android:focusable="true"
         android:contentDescription="@string/add_new_shop_item"
-        android:src="@drawable/ic_add"
+        android:foreground="@drawable/ic_add"
         />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_sum_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="20dp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+            <TextView
+                android:textSize="20sp"
+                android:text="sum"
+                android:textColor="@color/black"
+                android:gravity="end"
+                android:textStyle="bold|italic"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:id="@+id/tv_sum_field"
+                android:layout_marginStart="20dp"
+                android:gravity="start"
+                android:layout_weight="1"
+                android:text="@string/default_text_sum_field"
+                android:textStyle="bold|italic"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
 
 
 
