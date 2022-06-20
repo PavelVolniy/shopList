@@ -10,6 +10,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:background="@drawable/ic_background_list"
+        android:backgroundTint="#B35E9CBF"
         android:id="@+id/rv_shop_list"
         app:layout_constraintBottom_toTopOf="@id/cv_sum_card"
         app:layout_constraintTop_toTopOf="parent"
@@ -52,7 +53,7 @@
                 android:textSize="20sp"
                 android:text="@string/text_sum_field"
                 android:textColor="@color/white"
-                android:gravity="end"
+                android:gravity="center"
                 android:textStyle="bold|italic"
                 android:layout_weight="1"
                 android:layout_width="wrap_content"
@@ -60,9 +61,10 @@
                 />
             <TextView
                 android:id="@+id/tv_sum_field"
+                android:textSize="20sp"
                 android:layout_marginStart="20dp"
                 android:gravity="start"
-                android:layout_weight="1"
+                android:layout_weight="6"
                 android:text="@string/default_text_sum_field"
                 android:textStyle="bold|italic"
                 android:textColor="@color/white"

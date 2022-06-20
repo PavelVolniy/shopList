@@ -12,5 +12,5 @@
     <string name="text_price_field">цена</string>
     <string name="hint_price_field">цена</string>
     <string name="default_text_sum_field">10</string>
-    <string name="text_sum_field">итоговая сумма</string>
+    <string name="text_sum_field">сумма</string>
 </resources>
