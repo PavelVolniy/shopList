@@ -2,6 +2,7 @@ package com.example.shopList.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.shopList.domain.ShopItem
 
 @Dao
 interface ShopItemDAO {
@@ -15,6 +16,6 @@ interface ShopItemDAO {
     suspend fun deleteAllShopItems()
     @Query("SELECT * FROM shopItems WHERE id=:shopItemID LIMIT 1")
     suspend fun getShopItemById(shopItemID: Int): ShopItemDbModel
-//    @Query("SELECT * FROM shopItems")
-//    suspend fun getSumShopItem()
+    @Query("SELECT SUM(price * count) FROM shopItems WHERE enabled = 1")
+    fun getSumShopItem() : LiveData<Double>
 }

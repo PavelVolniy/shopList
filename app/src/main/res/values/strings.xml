@@ -1,15 +1,16 @@
 <resources>
     <string name="app_name">Список покупок</string>
     <string name="add_new_shop_item">Add new shop item</string>
-    <string name="hintFieldName">Name:</string>
-    <string name="hintFieldCount">count</string>
-    <string name="saveButtonText">save</string>
+    <string name="hintFieldName">Название:</string>
+    <string name="hintFieldCount">Колличество</string>
+    <string name="saveButtonText">Сохранить</string>
     <string name="error_input_count">invalid count</string>
     <string name="error_input_name">invalid name</string>
     <string name="default_text">Что то там</string>
     <string name="thickness">1</string>
     <string name="text_main_menu_clear_list">Очистить список покупок</string>
-    <string name="text_price_field">price</string>
-    <string name="hint_price_field">price</string>
+    <string name="text_price_field">цена</string>
+    <string name="hint_price_field">цена</string>
     <string name="default_text_sum_field">10</string>
+    <string name="text_sum_field">итоговая сумма</string>
 </resources>

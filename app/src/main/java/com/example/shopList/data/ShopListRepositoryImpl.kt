@@ -1,10 +1,12 @@
 package com.example.shopList.data
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.shopList.domain.ShopItem
 import com.example.shopList.domain.ShopListRepository
+import kotlin.math.log
 
 class ShopListRepositoryImpl(
     application: Application
@@ -16,30 +18,32 @@ class ShopListRepositoryImpl(
     private var shopListLD = MutableLiveData<List<ShopItem>>()
     private lateinit var list: List<ShopItem>
     private val mapper = ShopListMapper()
+    private var sum :String = "0.0"
 
 
-
-
-
-    suspend override fun addShopItem(shopItem: ShopItem) {
+    override suspend fun addShopItem(shopItem: ShopItem) {
         shopItemDAO.insertShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
-    suspend override fun deleteShopItem(shopItem: ShopItem) {
+    override suspend fun deleteShopItem(shopItem: ShopItem) {
         shopItemDAO.deleteShopItem(shopItem.id)
     }
 
-    suspend override fun editShopItem(shopItem: ShopItem) {
+    override suspend fun editShopItem(shopItem: ShopItem) {
         shopItemDAO.insertShopItem(mapper.mapEntityToDbModel(shopItem))
     }
 
-    suspend override fun getShopItem(shopItemId: Int): ShopItem {
+    override suspend fun getShopItem(shopItemId: Int): ShopItem {
         val dbModel = shopItemDAO.getShopItemById(shopItemId)
         return mapper.mapDbModelToEntity(dbModel)
     }
 
-    override suspend fun getSumShopItem(){
-//        shopItemDAO.getSumShopItem()
+    override fun getSumShopItem():MutableLiveData<String> {
+        return MediatorLiveData<String>().apply {
+            addSource(shopItemDAO.getSumShopItem()){
+                value = it.toString()
+            }
+        }
     }
 
     override suspend fun clearShopItemList() {

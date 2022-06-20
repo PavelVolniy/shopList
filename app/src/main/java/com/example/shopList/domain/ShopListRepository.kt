@@ -9,6 +9,6 @@ interface ShopListRepository {
     suspend fun editShopItem(shopItem: ShopItem)
     suspend fun getShopItem(shopItemId: Int): ShopItem
     suspend fun clearShopItemList()
-    suspend fun getSumShopItem()
+    fun getSumShopItem():MutableLiveData<String>
     fun getShopList(): MutableLiveData<List<ShopItem>>
 }

@@ -1,10 +1,10 @@
 package com.example.shopList.presentation
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -14,13 +14,13 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopList.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var viewAdapter: ShopListAdapter
     private var shopItemContainer: FragmentContainerView? = null
-    private val handler = Handler(Looper.getMainLooper())
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +32,9 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         viewModel.shopList.observe(this) {
             viewAdapter.submitList(it)
         }
-
+        viewModel.sumShopList.observe(this){
+            setupSumPriceShopItems(it)
+        }
         findViewById<FloatingActionButton>(R.id.fab_add_button).setOnClickListener {
             if (isOnePaneMode()) {
                 val intent = ShopItemActivity.newIntentAddItem(this)
@@ -43,6 +45,9 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         }
     }
 
+    private fun setupSumPriceShopItems(sum: String) {
+        findViewById<TextView>(R.id.tv_sum_field).text = sum
+    }
 
 
     private fun setupRecyclerView() {
@@ -127,13 +132,13 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId){
-            R.id.m_clear_list->{
+        when (item.itemId) {
+            R.id.m_clear_list -> {
                 viewModel.deleteAllShopItems()
             }
         }
 
-        Toast.makeText(this,"Список очищен", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Список очищен", Toast.LENGTH_SHORT).show()
         return super.onOptionsItemSelected(item)
     }
 }

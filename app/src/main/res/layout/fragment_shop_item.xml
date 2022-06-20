@@ -23,6 +23,8 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_name"
             android:hint="@string/hintFieldName"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
