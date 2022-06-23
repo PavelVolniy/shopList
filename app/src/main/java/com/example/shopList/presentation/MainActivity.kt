@@ -1,7 +1,6 @@
 package com.example.shopList.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shopList.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import org.w3c.dom.Text
 
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
 
@@ -32,7 +30,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         viewModel.shopList.observe(this) {
             viewAdapter.submitList(it)
         }
-        viewModel.sumShopList.observe(this){
+        viewModel.sumShopList.observe(this) {
             setupSumPriceShopItems(it)
         }
         findViewById<FloatingActionButton>(R.id.fab_add_button).setOnClickListener {
@@ -64,7 +62,6 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         )
         setupLongClickListener()
         setupClickListener()
-
         setupSwipeListener(rvShopList)
 
     }
@@ -104,8 +101,8 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         itemTouchHelper.attachToRecyclerView(rvShopList)
     }
 
-    private fun setupClickListener() {
-        viewAdapter.onShopItemClickListener = {
+    private fun setupLongClickListener() {
+        viewAdapter.onShopItemLongClickListener = {
             if (isOnePaneMode()) {
                 val intent = ShopItemActivity.newIntentEditItem(this, it.id)
                 startActivity(intent)
@@ -115,8 +112,8 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
         }
     }
 
-    private fun setupLongClickListener() {
-        viewAdapter.onShopItemLongClickListener = {
+    private fun setupClickListener() {
+        viewAdapter.onShopItemClickListener = {
             viewModel.changeEnableState(it)
         }
     }

@@ -4,13 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.MainActivity">
+    tools:context=".presentation.MainActivity"
+    android:background="@drawable/ic_background_list_land"
+    >
 
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_shop_list"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/cv_sum_card"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintRight_toRightOf="@id/gl_middle"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -19,6 +21,46 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/item_shop_enabled"
         />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_sum_card"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/rv_shop_list"
+        app:layout_constraintLeft_toLeftOf="@id/rv_shop_list">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_title_color"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/text_sum_field"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold|italic" />
+            <TextView
+                android:id="@+id/tv_sum_field"
+                android:textSize="20sp"
+                android:layout_marginStart="20dp"
+                android:gravity="start"
+                android:layout_weight="6"
+                android:text="@string/default_text_sum_field"
+                android:textStyle="bold|italic"
+                android:textColor="@color/white"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_add_button"
