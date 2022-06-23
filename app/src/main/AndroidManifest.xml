@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.shoplist">
+    package="com.example.shopList">
 
     <application
         android:allowBackup="true"
@@ -10,8 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ShopList">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name="com.example.shopList.presentation.ShopItemActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="fullSensor"/>
+        <activity
+            android:name="com.example.shopList.presentation.MainActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
